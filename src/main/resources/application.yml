@@ -1,0 +1,12 @@
+
+spring:
+  # VSCodeのログの設定
+  output:
+   ansi:
+     enabled: always
+  # DBの設定(ローカル用)
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/blogs
+    username: postgres
+    password: postgres

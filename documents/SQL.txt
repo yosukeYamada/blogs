@@ -1,0 +1,16 @@
+DROP DATABASE if exists "blogs";
+create database "blogs";
+
+drop table if exists users;
+create table users(user_id Integer not null,user_name text not null, mail_address text not null,date date not null,register_user_id Integer not null,register_date timestamp not null, update_user_id Integer not null,update_date timestamp not null, status Integer not null,version Integer not null);
+
+drop table if exists blogs;
+create table blogs(blog_id Integer not null,user_id Integer not null, date date not null,register_user_id Integer not null,register_date timestamp not null, update_user_id Integer not null,update_date timestamp not null, status Integer not null,version Integer not null);
+
+
+drop table if exists articles;
+create table articles(article_id Integer not null,blog_id Integer not null,article_content text not null,category_id Integer,date date not null,register_user_id Integer not null,register_date timestamp not null, update_user_id Integer not null,update_date timestamp not null, status Integer not null,version Integer not null);
+
+
+drop table if exists categories;
+create table categories(category_id Integer not null,category_name text not null,register_user_id Integer not null,register_date timestamp not null, update_user_id Integer not null,update_date timestamp not null, status Integer not null,version Integer not null);
