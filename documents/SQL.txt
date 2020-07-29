@@ -2,15 +2,30 @@ DROP DATABASE if exists "blogs";
 create database "blogs";
 
 drop table if exists users;
-create table users(user_id Integer not null,user_name text not null, mail_address text not null,date date not null,register_user_id Integer not null,register_date timestamp not null, update_user_id Integer not null,update_date timestamp not null, status Integer not null,version Integer not null);
+create table users(user_id Integer not null AUTO_INCREMENT PRIMARY KEY,user_name text not null, mail_address text not null,date date not null,register_user_id Integer not null,register_date timestamp not null, update_user_id Integer,update_date timestamp, status Integer not null,version Integer not null);
 
 drop table if exists blogs;
-create table blogs(blog_id Integer not null,user_id Integer not null, date date not null,register_user_id Integer not null,register_date timestamp not null, update_user_id Integer not null,update_date timestamp not null, status Integer not null,version Integer not null);
+create table blogs(blog_id Integer not null AUTO_INCREMENT PRIMARY KEY,user_id Integer not null, date date not null,register_user_id Integer not null,register_date timestamp not null, update_user_id Integer,update_date timestamp, status Integer not null,version Integer not null);
 
 
 drop table if exists articles;
-create table articles(article_id Integer not null,blog_id Integer not null,article_content text not null,category_id Integer,date date not null,register_user_id Integer not null,register_date timestamp not null, update_user_id Integer not null,update_date timestamp not null, status Integer not null,version Integer not null);
+create table articles(article_id Integer not null AUTO_INCREMENT PRIMARY KEY,article_title text not null,blog_id Integer not null,article_content text not null,category_id Integer,date date not null,register_user_id Integer not null,register_date timestamp not null, update_user_id Integer,update_date timestamp, status Integer not null,version Integer not null);
 
 
 drop table if exists categories;
-create table categories(category_id Integer not null,category_name text not null,register_user_id Integer not null,register_date timestamp not null, update_user_id Integer not null,update_date timestamp not null, status Integer not null,version Integer not null);
+create table categories(category_id Integer not null AUTO_INCREMENT PRIMARY KEY,category_name text not null,register_user_id Integer not null,register_date timestamp not null, update_user_id Integer,update_date timestamp, status Integer not null,version Integer not null);
+
+drop table if exists tags;
+create table tags(tag_id Integer not null AUTO_INCREMENT PRIMARY KEY, tag_name text not null, register_user_id Integer not null, register_date Timestamp not null, update_user_id Integer,update_date timestamp, status Integer not null,version Integer not null);
+
+drop table if exists article_comments;
+create table article_comments(article_comment_id Integer not null AUTO_INCREMENT PRIMARY KEY,article_id Integer not null,article_comment_content text not null,name_of_poster text not null,register_user_id Integer not null, register_date Timestamp not null, update_user_id Integer,update_date Timestamp,status Integer not null,version Integer not null);
+
+drop table if exists article_tags;
+create table article_tags(article_tag_id Integer not null AUTO_INCREMENT PRIMARY KEY,tag_id Integer not null,article_id Integer not null,register_user_id Integer not null, register_date Timestamp not null, update_user_id Integer,update_date Timestamp,status Integer not null,version Integer not null);
+
+drop table if exists article_categories;
+create table article_categories(article_ategory_id Integer not null AUTO_INCREMENT PRIMARY KEY,category_id Integer not null,article_id Integer not null,register_user_id Integer not null, register_date Timestamp not null, update_user_id Integer,update_date Timestamp,status Integer not null,version Integer not null);
+
+
+

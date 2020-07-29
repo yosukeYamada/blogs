@@ -1,12 +1,34 @@
 
 spring:
-  # VSCodeのログの設定
-  output:
-   ansi:
-     enabled: always
+#  # VSCodeのログの設定
+#  output:
+#   ansi:
+#     enabled: always
   # DBの設定(ローカル用)
   datasource:
-    driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/blogs
-    username: postgres
-    password: postgres
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blogs?serverTimezone=JST
+    username: root
+    password: sqlMyTe310nowing
+    
+    
+status:
+  HOLD: 0
+  AVAILABLE: 1
+  BAN: 2
+  DELETED: 9
+  
+version:
+  DEFAULT: 1
+  
+environments:
+  originUrl: http://localhost:8888
+  
+#consoleにSQLログを表示させる
+logging:
+  level:
+    org: 
+      springframework: WARN  
+    com:
+      example:
+        mapper: DEBUG
