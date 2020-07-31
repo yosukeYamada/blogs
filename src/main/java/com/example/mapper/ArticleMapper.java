@@ -15,7 +15,9 @@ public interface ArticleMapper {
 	
 	public List<Article> findAll();
 	
-	public Article update(Article article);
+	public void updateArticle(Article article);
+	
+	public void updateAllArticle(List<Article> articleList);
 	
 	
 }

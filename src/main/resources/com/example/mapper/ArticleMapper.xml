@@ -82,6 +82,21 @@
 		#{status})
 
 	</insert>
+	
+	<update id="updateArticle" parameterType="com.example.domain.Article">
+		
+		UPDATE articles
+		SET
+		article_id =#{articleId},
+		article_title=#{articleTitle},
+		article_content=#{articleContent},
+		blog_id=#{blogId},
+		category_id=#{categoryId},
+		update_user_id=#{updateUserId},
+		update_date=#{updateDate},
+		version = version+1
+		WHERE article_id=#{articleId}
+	</update>
 
 
 </mapper>

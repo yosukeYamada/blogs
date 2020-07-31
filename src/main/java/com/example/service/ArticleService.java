@@ -11,7 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.common.StatusConfigration;
 import com.example.domain.Article;
-import com.example.form.RegisterArticleFrom;
+import com.example.form.RegisterArticleForm;
+import com.example.form.UpdateArticleForm;
 import com.example.mapper.ArticleMapper;
 
 /**
@@ -23,20 +24,20 @@ import com.example.mapper.ArticleMapper;
 @Service
 @Transactional
 public class ArticleService {
-	
+
 	@Autowired
 	private ArticleMapper articleMapper;
-	
+
 	@Autowired
 	private StatusConfigration statusConfigration;
-	
+
 	/**
 	 * 記事1件を登録するメソッド.
 	 * 
 	 * @param form リクエストパラメータ
 	 * @return 登録した記事
 	 */
-	public Article registerArticle(RegisterArticleFrom form) {
+	public Article registerArticle(RegisterArticleForm form) {
 		Article article = new Article();
 		BeanUtils.copyProperties(form, article);
 		Timestamp registerDate = new Timestamp(System.currentTimeMillis());
@@ -48,8 +49,27 @@ public class ArticleService {
 		Article newArticle = articleMapper.findByArticleId(articleId);
 		return newArticle;
 	}
-	
-	public List<Article> getAllArticleList(){
+
+	public Article updateArticle(UpdateArticleForm form) throws Exception {
+		Integer articleId = form.getArticleId();
+		Article article = articleMapper.findByArticleId(articleId);
+
+		if (article.getVersion() == form.getVersion()) {
+			BeanUtils.copyProperties(form, article);
+			Integer updateUserId = form.getUpdateUserId();
+			article.setUpdateUserId(updateUserId);
+			Timestamp updateDate = new Timestamp(System.currentTimeMillis());
+			article.setUpdateDate(updateDate);
+			articleMapper.updateArticle(article);
+		}else {
+			throw new Exception();
+		}
+		Article newArticle = articleMapper.findByArticleId(articleId);
+
+		return newArticle;
+	}
+
+	public List<Article> getAllArticleList() {
 		List<Article> articleList = articleMapper.findAll();
 		return articleList;
 	}
